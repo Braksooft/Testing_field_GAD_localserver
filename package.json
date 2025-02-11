@@ -1,0 +1,25 @@
+{
+  "name": "testing_field_gad_localserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test_ui": "npx playwright test --ui",
+    "test:e2e": "npx playwright test --config=e2e.config.ts --project=chrome --headed",
+    "test:api": "npx playwright test --config=api.config.ts --project=chrome ",
+    "test:jenkins": "npx playwright test",
+    "server:jenkins": "java -jar jenkins.war --httpPort=8000 --enable-future-java"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.7.5"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "prettier": "^3.4.2"
+  }
+}
