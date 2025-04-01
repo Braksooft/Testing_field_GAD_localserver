@@ -38,7 +38,8 @@ test.describe("Login to Gad system ", () => {
         const assertpopup = page.getByTestId("alert-popup")
         const assertmessage = "User not created! Email not unique"
         // Act:
-        await registerUser.registerToGad("test@test.ts", "1999-01-31", "123456")
+        // First use after reset database could be failed
+        await registerUser.registerToGad("Jan","Kowalski","test@test.ts", "1999-01-31", "123456")
         // Assert:
         await expect(assertpopup).toHaveText(assertmessage)
     });
@@ -46,8 +47,10 @@ test.describe("Login to Gad system ", () => {
     test('Register New User', async ({page}) => {
         // Arrange:
         let email = faker.internet.email({ provider: 'example.fakerjs.dev' })
+        let firstName = faker.person.firstName()
+        let lastName =faker.person.lastName()
         // Act:
-        await registerUser.registerToGad( email , "1999-01-31", "123456")
+        await registerUser.registerToGad(firstName, lastName, email , "1999-01-31", "123456")
         let data = email
         fs.writeFileSync('register_user.ts', data);
         // Assert:

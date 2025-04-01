@@ -6,9 +6,7 @@
   "scripts": {
     "test_ui": "npx playwright test --ui",
     "test:e2e": "npx playwright test --config=e2e.config.ts --project=chrome --headed",
-    "test:api": "npx playwright test --config=api.config.ts --project=chrome ",
-    "test:jenkins": "npx playwright test",
-    "server:jenkins": "java -jar jenkins.war --httpPort=8000 --enable-future-java"
+    "test:api": "npx playwright test --config=api.config.ts --project=chrome "
 
   },
   "keywords": [],

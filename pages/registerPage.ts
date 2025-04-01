@@ -36,11 +36,11 @@ export class RegisterUser {
         this.password = page.locator('#password')
 
     }
-    async registerToGad(email: string, birthDate: string, password: string) {
+    async registerToGad(firstName: string, lastName: string, email: string, birthDate: string, password: string) {
         await this.loginIcon.hover()
         await this.registerDropdown.click()
-        await this.firstName.fill(faker.person.firstName())
-        await this.lastName.fill(faker.person.lastName())
+        await this.firstName.fill(firstName)
+        await this.lastName.fill(lastName)
         await this.email.fill(email)
         await this.birthDate.fill(birthDate)
         await this.doneButton.click()

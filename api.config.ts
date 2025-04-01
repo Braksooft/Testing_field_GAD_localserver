@@ -2,7 +2,7 @@ import {PlaywrightTestConfig} from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
 
-const BASE_URL = 'http://127.0.0.1:3000'
+const BASE_URL = 'http://127.0.0.1:3000/'
 const filetoken = path.join(__dirname, 'token.json')
 const token = JSON.parse(fs.readFileSync(filetoken, 'utf-8')).token
 const config: PlaywrightTestConfig = {

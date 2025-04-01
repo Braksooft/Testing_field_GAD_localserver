@@ -3,16 +3,14 @@ import fs from 'fs';
 import path from 'path';
 
 test.describe("Api testing system", () => {
-    const baseURL = 'http://127.0.0.1:3000/api'
+    const BASE_URL = 'http://127.0.0.1:3000/api'
 
-    // test.beforeEach(async ({ page }) => {
-    //     // TODO: open the page
-    // });
+    // Run test with "npm run test:api " to use api.config.ts
 
-    test("simple test -  response status -200 ", async ({ request }) => {
+    test("simple test - response status -200 ", async ({ request }) => {
         // Arrange:
         // Act:
-        const response = await request.get(`${baseURL}/users`);
+        const response = await request.get(`${BASE_URL}/users`);
         console.log(response.status())
         const responseBody = await response.json()
         console.log(responseBody)
@@ -23,7 +21,7 @@ test.describe("Api testing system", () => {
     test("Negative test -  response status 404 ", async ({ request }) => {
         // Arrange:
         // Act:
-        const response = await request.get(`${baseURL}/users11`);
+        const response = await request.get(`${BASE_URL}/users11`);
         console.log(response.status())
         const responseBody = await response.json()
         console.log(responseBody)
@@ -34,7 +32,7 @@ test.describe("Api testing system", () => {
     test("simple test - GET single user", async ({ request }) => {
         // Arrange:
         // Act:
-        const response = await request.get(`${baseURL}/users/1`);
+        const response = await request.get(`${BASE_URL}/users/1`);
         // first way to get response
         const responseUserOne = JSON.parse(await response.text())
         // second way to get response
@@ -55,7 +53,7 @@ test.describe("Api testing system", () => {
     test("simple test - POST single user", async ({ request }) => {
         // Arrange:
         // Act:
-        const response = await request.post(`${baseURL}/users`, { 
+        const response = await request.post(`${BASE_URL}/users`, { 
             data: {
             "email": "szymon@example.com",
             "firstname": "Szymon",
@@ -74,7 +72,7 @@ test.describe("Api testing system", () => {
     test("login and save token - GET single user", async ({ request }) => {
         // Arrange:
         // Act:
-        const response = await request.post(`${baseURL}/login` , {
+        const response = await request.post(`${BASE_URL}/login` , {
             data: {
                 "email": "szymon@example.com",
                 "password": "123456"
@@ -95,7 +93,7 @@ test.describe("Api testing system", () => {
 
         // update token
         // Act:
-        const response = await request.put(`${baseURL}/users/${userID}`, { 
+        const response = await request.put(`${BASE_URL}/users/${userID}`, { 
             headers: {
                 'Authorization': `Bearer ${token}`,
               },
@@ -111,7 +109,7 @@ test.describe("Api testing system", () => {
         // Assert:
         expect(response.status()).toBe(200);  
     });
-    test.only("simple test - DELETE single user", async ({ request }) => {
+    test("simple test - DELETE single user", async ({ request }) => {
         // Arrange:
 
         // Odopalane z plikiem api.config.ts z scryptu npm run test:api brak headera z tokenem 
@@ -119,7 +117,7 @@ test.describe("Api testing system", () => {
         const fileuserID= path.join(__dirname, '../../userID.json')
         const userID = JSON.parse(fs.readFileSync(fileuserID, 'utf-8')).id
         // Act:
-        const response = await request.delete(`${baseURL}/users/${userID}`);
+        const response = await request.delete(`${BASE_URL}/users/${userID}`);
         // Assert:  
         await expect(response.status()).toBe(200);
     });
